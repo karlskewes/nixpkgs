@@ -1,0 +1,32 @@
+diff --git a/src/evdev-mt-touchpad.c b/src/evdev-mt-touchpad.c
+index e2ecdea7..5b040ce5 100644
+--- a/src/evdev-mt-touchpad.c
++++ b/src/evdev-mt-touchpad.c
+@@ -3350,10 +3350,6 @@ tp_init_palmdetect_edge(struct tp_dispatch *tp,
+ 	    !tp_is_tpkb_combo_below(device))
+ 		return;
+
+-	/* Edge palm detection hurts more than it helps on Apple touchpads. */
+-	if (evdev_device_has_model_quirk(device, QUIRK_MODEL_APPLE_TOUCHPAD))
+-		return;
+-
+ 	evdev_device_get_size(device, &width, &height);
+
+ 	/* Enable edge palm detection on touchpads >= 70 mm. Anything
+diff --git a/test/litest.h b/test/litest.h
+index 95150831..457790b3 100644
+--- a/test/litest.h
++++ b/test/litest.h
+@@ -1287,7 +1287,7 @@ litest_has_palm_detect_size(struct litest_device *dev)
+ 	if (bustype == BUS_BLUETOOTH)
+ 		return 0;
+ 	if (vendor == VENDOR_ID_APPLE)
+-		return 0;
++		return 1;
+
+ 	rc = libinput_device_get_size(dev->libinput_device, &width, &height);
+
+--
+GitLab
+
+

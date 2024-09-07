@@ -59,6 +59,7 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./udev-absolute-path.patch
+    ./apple-revert-disable-edge-palm-detection.patch
   ];
 
   nativeBuildInputs = [
